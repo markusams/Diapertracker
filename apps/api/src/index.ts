@@ -2,6 +2,8 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 
 import { postRoutes } from "@/modules/posts";
+import { diaperProductsRoutes } from "@/modules/diaper-products/diaper-products.routes";
+import { diaperPurchasesRoutes } from "@/modules/diaper-purchases/diaper-purchases.routes";
 
 import { logger } from "hono/logger";
 import { errorHandler } from "@/pkg/middleware/error";
@@ -31,7 +33,9 @@ const routes = app
   .basePath("/api")
   .use("*", errorHandler())
   .route("/webhooks", webhookRoutes)
-  .route("/posts", postRoutes);
+  .route("/posts", postRoutes)
+  .route("/diaper-products", diaperProductsRoutes)
+  .route("/diaper-purchases", diaperPurchasesRoutes);
 
 export type AppType = typeof routes;
 
